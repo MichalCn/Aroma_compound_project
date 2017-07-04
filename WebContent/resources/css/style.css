@@ -1,0 +1,92 @@
+/* body { */
+/* 	background-image: url("../images/book.jpeg"); */
+/* 	background-position: center; */
+/* } */
+
+body {
+    font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+div.nonvisible {
+	display: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: Montserrat,'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: 3em;
+    margin: 0;
+}
+
+h3 {
+    font-size: 2em;
+    margin: 0;
+}
+
+section.success {
+
+}
+
+.text-center {
+    text-align: center!important;
+}
+
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+.list-inline-item {
+    display: inline-block;
+}
+
+.btn-social {
+    font-size: 20px;
+    line-height: 45px;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    border: 2px solid black;
+/*     border: 2px solid #fff; */
+    border-radius: 100%;
+}
+
+div.main {
+	color: #fff;
+    background: #18bc9c;
+}
+
+/* div { */
+/* 	width: 200px; */
+/* 	background-image: linear-gradient(180deg, white, grey); */
+/* } */
+
+/* .divA { */
+/* 	width: 200px; */
+/* 	background-image: linear-gradient(180deg, white, #bce0ee); */
+	
+   
+/* } */
+
+.error {
+	color: #d9534f;
+	color: red;
+	font-size: 16px;
+	font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+#this {
+	color: red;
+}
+
+
