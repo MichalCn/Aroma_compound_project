@@ -28,6 +28,7 @@ public class Ingredient {
 	
 	@NotBlank
 	@Size(min = 3, max = 20)
+	@Column(unique=true)
 	private String name;
 	
 	@Size(max = 600)

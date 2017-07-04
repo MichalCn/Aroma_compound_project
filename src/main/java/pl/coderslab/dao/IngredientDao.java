@@ -1,26 +1,37 @@
 package pl.coderslab.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.client.RestTemplate;
 
 import pl.coderslab.model.Ingredient;
 import pl.coderslab.repository.IngredientRepository;
 
-@Controller
-@RequestMapping("/ingredientdao")
-public class IngredientApiDao {
+@Repository
+public class IngredientDao {
 	
 	@Autowired
 	IngredientRepository ingredientRepository;
-		
-	@RequestMapping(path="/load", method= RequestMethod.POST)
+	
+	// ADD FROM API BY NAME
+	public Ingredient getIngredientFromApi(String name) {
+		Ingredient ingredient = null;
+		try {
+			RestTemplate restTemplate = new RestTemplate();
+			ingredient = restTemplate.getForObject("http://localhost:8081/getFromApi/ingredient/"+name, Ingredient.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ingredient;
+	}
+	
+	
+	// LOAD BY JASON
+	@RequestMapping(path="/load", method= RequestMethod.POST)	// not controller!
 	@ResponseBody
 	public String addBookTest(@RequestBody Ingredient ingredient){
 		ingredientRepository.save(ingredient);
@@ -28,19 +39,15 @@ public class IngredientApiDao {
 		return "Ingredient added, id: "+ingredient.getId();
 	}
 	
-//	JSON
-//	{"id":2,"name":"Pinaple","description":"","links":"","image":"","category":"","aromas":""}
-	
-	@RequestMapping(path="/getjson", method= RequestMethod.GET)
-	@ResponseBody
-	public Ingredient getBookTest(){
-		return ingredientRepository.getOne(2L);
-	}
-	
-	/*
-	 Wszystko czego nam brakowało to dodanie Adnotacji @RequestBody przed nazwa książki. 
-	 Spring sam wyłapuje, ze to json i od razu tworzy obiekt book. 
-	 */
+////	JSON EXAMPLES
+////	{"id":2,"name":"Pinaple","description":"","links":"","image":"","category":"","aromas":""}
+//		{"name":"Pinaple"}
+
+//	@RequestMapping(path="/getjson", method= RequestMethod.GET)
+//	@ResponseBody
+//	public Ingredient getBookTest(){
+//		return ingredientRepository.getOne(2L);
+//	}
 	
 //	@PostMapping("/add")
 //	@ResponseBody
@@ -59,9 +66,6 @@ public class IngredientApiDao {
 //		}
 //		
 //	}
-
-//	JSON
-//	list.add(new Book(1L, "9788324631766", "Thiniking in Java", "Bruce Eckel", "Helion", "programming"));
 	
 //	############### METHODS
 //	public Book getBook(Long id) {
