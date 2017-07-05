@@ -19,11 +19,12 @@
 		<a href="./user/login"> Login</a><br>
 		<a href="./user/register"> Register</a><br>
 		<br>
-		<a href="./combination/add"> Add combination</a><br>
+		<a href="./user/"> User page</a><br>
 		<br>
 		<h4 class="sliders"> Admin</h4>
 		<div class="nonvisible">
 			<a href="./user/list"> Users list</a><br>
+			<a href="./combination/listall"> Combinations list</a><br>
 			<a href="./user/authenticated"> Authenticated</a><br>
 			<a href="./ingredient/add1"> Generate ingredients</a><br>
 		</div>

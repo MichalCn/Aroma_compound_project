@@ -2,10 +2,6 @@ package pl.coderslab.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import pl.coderslab.model.Ingredient;
@@ -17,7 +13,7 @@ public class IngredientDao {
 	@Autowired
 	IngredientRepository ingredientRepository;
 	
-	// ADD FROM API BY NAME
+	// ADD THROUGH API BY NAME
 	public Ingredient getIngredientFromApi(String name) {
 		Ingredient ingredient = null;
 		try {
@@ -29,15 +25,6 @@ public class IngredientDao {
 		return ingredient;
 	}
 	
-	
-	// LOAD BY JASON
-	@RequestMapping(path="/load", method= RequestMethod.POST)	// not controller!
-	@ResponseBody
-	public String addBookTest(@RequestBody Ingredient ingredient){
-		ingredientRepository.save(ingredient);
-		System.out.println(ingredient.getName());
-		return "Ingredient added, id: "+ingredient.getId();
-	}
 	
 ////	JSON EXAMPLES
 ////	{"id":2,"name":"Pinaple","description":"","links":"","image":"","category":"","aromas":""}

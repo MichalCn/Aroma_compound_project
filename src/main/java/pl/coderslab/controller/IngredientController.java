@@ -2,8 +2,8 @@ package pl.coderslab.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestAttribute;
+
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import pl.coderslab.dao.IngredientDao;
 import pl.coderslab.model.Ingredient;
-import pl.coderslab.model.User;
 import pl.coderslab.repository.IngredientRepository;
 
 @Controller
@@ -35,8 +34,19 @@ public class IngredientController {
 	public String processAddIngredient(@RequestParam String name) {
 		Ingredient ingredient = ingredientDao.getIngredientFromApi(name);
 		ingredientRepository.save(ingredient);
-		return "success";
+		System.out.println(ingredient.getName());
+		return "Success! Ingredient added, id: "+ingredient.getId();
 	}
+	
+	// ADD=LOAD INGREDIENT THROUGH JSON FROM EXTERNAL SOURCE
+	@RequestMapping(path="/load", method= RequestMethod.POST)
+	@ResponseBody
+	public String addIngredientExternajJson(@RequestBody Ingredient ingredient){
+		ingredientRepository.save(ingredient);
+		System.out.println(ingredient.getName());
+		return "Success! Ingredient added, id: "+ingredient.getId();
+	}
+	
 	
 //	@RequestMapping(path="/add1", method= RequestMethod.GET)
 //	public String addIngredient1() {

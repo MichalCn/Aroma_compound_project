@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.SmartValidator;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,7 +46,7 @@ public class PairingController {
 		return ingredientRepository.findAll();
 	}
 	
-	//ADD
+	//ADD THROUGH FORM AND REPOSITORY
 	@RequestMapping(path="/add", method= RequestMethod.GET)
 	public String showAddPairingForm(Model model) {
 		Pairing pairing = new Pairing();
@@ -68,7 +69,7 @@ public class PairingController {
 		}
 	}
 	
-	// GET FROM API
+	// GET=ADD=LOAD INGREDIENT THROUGH API
 	@RequestMapping(path="/get", method= RequestMethod.GET)
 	public String addPairing() {
 		return "getPairingForm";
@@ -94,7 +95,15 @@ public class PairingController {
 		}
 		
 		pairingRepository.save(pairing);
-		return "success";
+		return "Success! Pairing added, id: "+pairing.getId();
+	}
+	
+	// ADD=LOAD PAIRING THROUGH JSON FROM EXTERNAL SOURCE
+	@RequestMapping(path="/load", method= RequestMethod.POST)	// not controller! move!!!
+	@ResponseBody
+	public String addPairingExternalJson(@RequestBody Pairing pairing){
+		pairingRepository.save(pairing);
+		return "Success! Pairing added, id: "+pairing.getId();
 	}
 	
 }

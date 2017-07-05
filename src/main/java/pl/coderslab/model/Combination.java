@@ -46,6 +46,14 @@ public class Combination {
 	
 	//########## GET-SET #############
 
+
+
+	@Override
+	public String toString() {
+		return "Combination [id=" + id + ", title=" + title + ", notes=" + notes + ", user=" + user + ", ingredients="
+				+ ingredients + ", created=" + created + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -62,12 +70,12 @@ public class Combination {
 		this.title = title;
 	}
 
-	public String getDescription() {
+	public String getNotes() {
 		return notes;
 	}
 
-	public void setDescription(String description) {
-		this.notes = description;
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 
 	public User getUser() {
@@ -78,22 +86,6 @@ public class Combination {
 		this.user = user;
 	}
 
-	public Date getCreated() {
-		return created;
-	}
-
-	public void setCreated(Date created) {
-		this.created = created;
-	}
-
-	public String getNotes() {
-		return notes;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-
 	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
@@ -102,10 +94,22 @@ public class Combination {
 		this.ingredients = ingredients;
 	}
 
-	@Override
-	public String toString() {
-		return "Combination [id=" + id + ", title=" + title + ", notes=" + notes + ", user=" + user + ", ingredients="
-				+ ingredients + ", created=" + created + "]";
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+	
+	public String getIngredientNames() {
+		String names = "";
+		for (int i = 0; i < ingredients.size(); i++) {
+			names += ingredients.get(i).getName();
+			names += ", ";
+		}
+	
+		return names;
 	}
 	
 }

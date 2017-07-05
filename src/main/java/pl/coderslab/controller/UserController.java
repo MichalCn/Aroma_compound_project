@@ -31,6 +31,13 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	@RequestMapping(path="/", method= RequestMethod.GET)
+	public String mainUserPage(Model model) {
+		model.addAttribute("user", new User());
+		model.addAttribute("path","/user");
+		return "mainUserView";
+	}
+	
 	@RequestMapping(path="/register", method= RequestMethod.GET)
 	public String registerUser(Model model) {
 		model.addAttribute("user", new User());
@@ -59,15 +66,15 @@ public class UserController {
 	}
 	
 	@RequestMapping(path="/login", method= RequestMethod.POST)
-	@ResponseBody
 	public String processloginUser(@ModelAttribute User user, BindingResult result, Model model, HttpServletRequest request) {
 		User userToCheck = userRepository.findByLogin(user.getLogin());
 		if (userToCheck != null && passwordEncoder.matches(user.getPassword(), userToCheck.getPassword())) {
-			request.getSession().setAttribute("logUserId", userToCheck.getLogin());
-			return "success";
+			request.getSession().setAttribute("logUserId", userToCheck.getId());
+			request.getSession().setAttribute("logUserLogin", userToCheck.getLogin());
+			return "redirect:/user/";
 		} else {
 			request.getSession().removeAttribute("logUserId");
-			return "Login failed, check login or password";
+			return "loginFailed";
 		}
 	}
 	
@@ -88,7 +95,7 @@ public class UserController {
 	@RequestMapping(path="/logout", method= RequestMethod.GET)	
 	public String logout(HttpServletRequest request) {
 		request.getSession().invalidate();
-		return "redirect:/user/login";
+		return "redirect:/";
 	}
 	
 //	response.getWriter().append(request.getRemoteAddr()+"\n");  			// Adres IP

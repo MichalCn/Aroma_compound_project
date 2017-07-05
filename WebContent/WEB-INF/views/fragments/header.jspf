@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <header>
-  	<p>User: <%= session.getAttribute("logUserId")%></p>
+  	<p>User: <%= session.getAttribute("logUserLogin")%> / <a href="./user/logout">Logout</a></p> 
   	
   	<p>-----------------------------------------------------</p>
 </header>

@@ -140,13 +140,14 @@ public class Ingredient {
 		this.aromas = aromas;
 	}
 
+	
 
 
-	@Override
-	public String toString() {
-		return "Ingredient [id=" + id + ", name=" + name + ", description=" + description + ", links=" + links
-				+ ", image=" + image + ", category=" + category + ", aromas=" + aromas + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Ingredient [id=" + id + ", name=" + name + ", description=" + description + ", links=" + links
+//				+ ", image=" + image + ", category=" + category + ", aromas=" + aromas + "]";
+//	}
 	
 	
 

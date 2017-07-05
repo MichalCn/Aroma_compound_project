@@ -56,9 +56,9 @@ public class CombinationController {
 	public String showAddCombinationForm(Model model) {
 		Combination combination = new Combination();
 		model.addAttribute("combination", combination);
-		model.addAttribute("path","/combination");
 		return "combinationForm";
 	}
+	
 	
 	@RequestMapping(path="/add", method= RequestMethod.POST)
 	public String processAddCombinationForm(@Valid @ModelAttribute Combination combination, BindingResult result, 
@@ -73,6 +73,20 @@ public class CombinationController {
 			System.out.println(combination);
 			return "redirect:/";
 		}
+	}
+	
+	//LIST BY USER
+	@RequestMapping(path="/list", method= RequestMethod.GET)
+	public String showUserCombinations(Model model, @SessionAttribute(name="logUserId") Long id) {
+		model.addAttribute("combinations", combinationRepository.findByUserId(id));
+		return "combinationList";
+	}
+	
+	//LIST ALL
+	@RequestMapping(path="/listall", method= RequestMethod.GET)	// dodac wyswietlanie user id
+	public String showAllCombinations(Model model) {
+		model.addAttribute("combinations", combinationRepository.findAll());
+		return "combinationList";
 	}
 
 	// TEST QUERIES
