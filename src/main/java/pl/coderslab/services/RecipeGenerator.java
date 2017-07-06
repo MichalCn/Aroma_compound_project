@@ -1,5 +1,9 @@
 package pl.coderslab.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +17,8 @@ import pl.coderslab.repository.PairingRepository;
 @Service
 public class RecipeGenerator {
 	
-	
-	PairingRepository pairingRepository;
-	
-	public void init() {
-		System.out.println("\n--------> 1\n");
-		
-	}
-	
 	@Autowired
-	public void setPairingRepository(PairingRepository pairingRepository) {
-		System.out.println("\n--------> 2\n " +(pairingRepository!=null));
-		this.pairingRepository = pairingRepository;
-	}
+	PairingRepository pairingRepository;
 	
 	public Double getCombinationRatio(List<Ingredient> ingredients) {
 		Double ratio = 1.0;
@@ -51,18 +44,66 @@ public class RecipeGenerator {
 		return ratio;
 	}
 	
-	private Ingredient getMatchingIngredient(List<Ingredient> ingredients) {
+	public Ingredient getMatchingIngredient(List<Ingredient> ingredients) {
 		
-		Double currentRatio = getCombinationRatio(ingredients);
+		List<Pairing> pairingsListMain = new ArrayList<>();
+		
+		pairingsListMain = pairingRepository.findByIngredient1Id(ingredients.get(0).getId());
+		for (int i =0; i < pairingsListMain.size(); i++) {
+			for (Ingredient ingredient : ingredients) {
+				if (ingredient.getId() == pairingsListMain.get(i).getIngredient2().getId()) {
+					pairingsListMain.remove(i);
+				}
+			}
+		}
 		
 		Ingredient matchingIngredient = null;
-		Double newRatio = 1.0;
-		for (Ingredient ingredientToVerify : ingredients) {
+		List<Pairing> pairingsList = new ArrayList<>();
+		Double newRatio = 0.0;
+		Double tempRatio = 0.0;
+		String checkedIngredients = "";
 		
+		for (Pairing pairingMain : pairingsListMain) {
+			Ingredient ingredientToCheck = pairingMain.getIngredient2();		
+			tempRatio = pairingMain.getRel();
+			for (int i=1; i<ingredients.size(); i++) {
+				pairingsList = pairingRepository.findByIngredient1Id(ingredients.get(i).getId());
+//				pairingsList.addAll(pairingRepository.findByIngredient2Id(ingredient.getId()));	//jesli nie wszystkie pairingsy dwustronne w bazie
+				for (Pairing pairing : pairingsList) {
+					if (pairing.getIngredient2().getName().matches(ingredientToCheck.getName())) {
+						tempRatio *= pairing.getRel();
+					}
+				}
+				
+			}
+
+			if (!ingredients.contains(ingredientToCheck)) {
+				checkedIngredients += ingredientToCheck.getName()+", ";
+				if (tempRatio > newRatio) {
+					newRatio = tempRatio;
+					matchingIngredient = ingredientToCheck;
+				}
+			}
 		}
+		
+		Double currentRatio = getCombinationRatio(ingredients);
+		String names = "";
+		for (Ingredient ingredient : ingredients) {
+			names += ingredient.getName()+", ";
+		}
+		
+		System.out.println("Initial ingredients: "+names);
+		System.out.println("Checked ingredients: "+checkedIngredients);
+		System.out.println("Matching ingredient: "+matchingIngredient.getName());
+		System.out.println("Best ratio: "+newRatio);
+		System.out.println("Final new ratio: "+currentRatio*newRatio);
 		
 		return matchingIngredient;
 	}
+	
+	
+	
+	
 	
 	private Combination matchIngredient(List<Ingredient> ingredients) {
 		return null;

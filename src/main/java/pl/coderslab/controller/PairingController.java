@@ -51,7 +51,7 @@ public class PairingController {
 		return ingredientRepository.findAll();
 	}
 	
-	//FIND PAIRING
+	//FIND PAIRING !!! ingredients not parametrized, coming from method body
 	@RequestMapping(path="/getPairing", method= RequestMethod.GET)
 	@ResponseBody
 	public String getPairing(Model model) {
@@ -67,7 +67,7 @@ public class PairingController {
 	}
 	
 	
-	//TEST RATIO
+	//GET RATIO !!! ingredients not parameterized, coming from method body
 	@RequestMapping(path="/ratio", method= RequestMethod.GET)
 	@ResponseBody
 	public String getRatio(Model model) {
@@ -79,6 +79,20 @@ public class PairingController {
 		ingredients.add(ingredientRepository.findOne(4L));
 		
 		return "Ratio: "+recipeGenerator.getCombinationRatio(ingredients);
+	}
+	
+	//GET MATCHING INGREDIENT !!! ingredients not parameterized, coming from method body
+	@RequestMapping(path="/bestmatch", method= RequestMethod.GET)
+	@ResponseBody
+	public String getMatch(Model model) {
+		
+		List<Ingredient> ingredients = new ArrayList<>();
+		ingredients.add(ingredientRepository.findOne(1L));
+		ingredients.add(ingredientRepository.findOne(2L));
+		ingredients.add(ingredientRepository.findOne(3L));
+		ingredients.add(ingredientRepository.findOne(4L));
+		
+		return "Best match: "+recipeGenerator.getMatchingIngredient(ingredients);
 	}
 	
 	
