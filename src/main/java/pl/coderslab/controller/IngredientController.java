@@ -23,6 +23,14 @@ public class IngredientController {
 	@Autowired
 	private IngredientDao ingredientDao; 
 	
+	// TEST GET
+	@RequestMapping(path="/testget", method= RequestMethod.GET)
+	@ResponseBody
+	public String getTestIngredient() {
+		Ingredient ingredient = ingredientRepository.getOne(1L);
+		return ingredient.getName();
+	}
+	
 	// ADD=LOAD INGREDIENT THROUGH API
 	@RequestMapping(path="/add", method= RequestMethod.GET)
 	public String addIngredient() {

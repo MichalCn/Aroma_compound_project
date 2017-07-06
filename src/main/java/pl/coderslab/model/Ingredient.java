@@ -43,20 +43,24 @@ public class Ingredient {
 	//energy kj
 	//protein gram/%
 	
-//	public Ingredient() {
-//	}
-//
-//	public Ingredient(Long id, String name, String description, String links, String image, String category,
-//			String aromas) {
-//		
-//		this.id = id;
-//		this.name = name;
-//		this.description = description;
-//		this.links = links;
-//		this.image = image;
-//		this.category = category;
-//		this.aromas = aromas;
-//	}
+	public Ingredient() {
+	}
+
+	public Ingredient(Long id, String name, String description, String links, String image, String category,
+			String aromas) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.links = links;
+		this.image = image;
+		this.category = category;
+		this.aromas = aromas;
+	}
+
+
+
+
 
 
 

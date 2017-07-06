@@ -10,4 +10,5 @@ public interface PairingRepository extends JpaRepository<Pairing, Long> {
 
 	List<Pairing> findByIngredient1Id(Long id);
 	List<Pairing> findByIngredient2Id(Long id);
+	Pairing findFirstByIngredient1IdAndIngredient2Id(Long id1, Long id2);
 }

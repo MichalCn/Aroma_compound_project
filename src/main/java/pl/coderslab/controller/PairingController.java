@@ -1,5 +1,6 @@
 package pl.coderslab.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ import pl.coderslab.model.Pairing;
 import pl.coderslab.model.User;
 import pl.coderslab.repository.IngredientRepository;
 import pl.coderslab.repository.PairingRepository;
+import pl.coderslab.services.RecipeGenerator;
 
 @Controller
 @RequestMapping("/pairing")
@@ -41,10 +43,44 @@ public class PairingController {
 	@Autowired
 	SmartValidator validator;
 	
+	@Autowired
+	RecipeGenerator recipeGenerator;
+	
 	@ModelAttribute("ingredients")		
 	public List<Ingredient> getAllIngredients() {
 		return ingredientRepository.findAll();
 	}
+	
+	//FIND PAIRING
+	@RequestMapping(path="/getPairing", method= RequestMethod.GET)
+	@ResponseBody
+	public String getPairing(Model model) {
+
+		Ingredient ingredient = ingredientRepository.findOne(1L);
+		Ingredient ingredientToCompare = ingredientRepository.findOne(2L);
+
+		Pairing pairing = pairingRepository.findFirstByIngredient1IdAndIngredient2Id(ingredient.getId(), ingredientToCompare.getId());
+		if (pairing == null) {
+			pairing = pairingRepository.findFirstByIngredient1IdAndIngredient2Id(ingredientToCompare.getId(), ingredient.getId());
+		}
+		return "Pairing power: "+pairing.getRel();
+	}
+	
+	
+	//TEST RATIO
+	@RequestMapping(path="/ratio", method= RequestMethod.GET)
+	@ResponseBody
+	public String getRatio(Model model) {
+		
+		List<Ingredient> ingredients = new ArrayList<>();
+		ingredients.add(ingredientRepository.findOne(1L));
+		ingredients.add(ingredientRepository.findOne(2L));
+		ingredients.add(ingredientRepository.findOne(3L));
+		ingredients.add(ingredientRepository.findOne(4L));
+		
+		return "Ratio: "+recipeGenerator.getCombinationRatio(ingredients);
+	}
+	
 	
 	//ADD THROUGH FORM AND REPOSITORY
 	@RequestMapping(path="/add", method= RequestMethod.GET)
