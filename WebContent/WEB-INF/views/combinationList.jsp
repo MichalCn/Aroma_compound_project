@@ -14,6 +14,7 @@
 <%@ include file="fragments/header.jspf" %>
 <%-- <jsp:include page="fragments/header.jspf"/> --%>
 <body>
+<div class="main">
 <table>
 	<tr>
 		<th>TITLE</th>
@@ -27,12 +28,14 @@
 			<td>${combination.notes}</td>
 			<td>${combination.created}</td>
 			<td>${combination.ingredientNames}</td>
+			<td><a href="match/${combination.id}" />twist with new match </td>
 			<td><a href="edit/${combination.id}" />edit </td>
 			<td><a href="delete/${combination.id}" />delete </td>
 		</tr>
 	</c:forEach>
 </table>
-<a href="../">back</a>
+</div>
+<a href="../user/">back</a>
 </body>
 </html>
 <%@ include file="fragments/footer.jspf" %>

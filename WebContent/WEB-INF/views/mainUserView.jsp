@@ -16,12 +16,19 @@
 	<div class="main">
 		<h3>User page</h3>
 		<br>
-		<a href="../combination/list">My combinations</a><br>
-		<a href="../combination/add">Create new combination</a><br>
-		<a > Upgrade/Twist existing recipe - not working</a><br>
-		<a > Suprise me! = Recommend - not working</a><br>
+		<div class="panel">
+			<a href="../combination/addultimate">Create new composition </a>!ULTIMATE MODE!<br>
+		</div>
+		<div class="panel">
+		<a href="../combination/list">My compositions</a><br>
+		</div>
+		<div class="panel">
+		<a href="../combination/add">Add existing composition</a><br>
+		</div>
+		<div class="panel">
+		<a href="https://s-media-cache-ak0.pinimg.com/originals/b2/63/03/b26303aec913be35375165c57e8e1e24.jpg"> Suprise me!</a>(Recommendation engine - not working, YET!)<br>
+		</div>
 		<br>
-		<a href="../"> <-- back to main page</a><br>
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="<c:url value="/resources/js/js1.js" />"></script>

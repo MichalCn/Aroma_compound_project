@@ -25,8 +25,6 @@
 		<div class="nonvisible">
 			<a href="./user/list"> Users list</a><br>
 			<a href="./combination/listall"> Combinations list</a><br>
-			<a href="./user/authenticated"> Authenticated</a><br>
-			<a href="./ingredient/add1"> Generate ingredients</a><br>
 		</div>
 	</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

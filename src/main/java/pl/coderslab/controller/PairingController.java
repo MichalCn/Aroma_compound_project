@@ -51,6 +51,14 @@ public class PairingController {
 		return ingredientRepository.findAll();
 	}
 	
+	//POPULATE
+	@RequestMapping(path="/populate", method= RequestMethod.GET)
+	@ResponseBody
+	public String populatePairings(Model model) {
+		recipeGenerator.populatePairingsDatabase();
+		return "Populated";
+	}
+	
 	//FIND PAIRING !!! ingredients not parametrized, coming from method body
 	@RequestMapping(path="/getPairing", method= RequestMethod.GET)
 	@ResponseBody
@@ -79,22 +87,7 @@ public class PairingController {
 		ingredients.add(ingredientRepository.findOne(4L));
 		
 		return "Ratio: "+recipeGenerator.getCombinationRatio(ingredients);
-	}
-	
-	//GET MATCHING INGREDIENT !!! ingredients not parameterized, coming from method body
-	@RequestMapping(path="/bestmatch", method= RequestMethod.GET)
-	@ResponseBody
-	public String getMatch(Model model) {
-		
-		List<Ingredient> ingredients = new ArrayList<>();
-		ingredients.add(ingredientRepository.findOne(1L));
-		ingredients.add(ingredientRepository.findOne(2L));
-		ingredients.add(ingredientRepository.findOne(3L));
-		ingredients.add(ingredientRepository.findOne(4L));
-		
-		return "Best match: "+recipeGenerator.getMatchingIngredient(ingredients);
-	}
-	
+	}	
 	
 	//ADD THROUGH FORM AND REPOSITORY
 	@RequestMapping(path="/add", method= RequestMethod.GET)
