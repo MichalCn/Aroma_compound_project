@@ -97,6 +97,7 @@ public class CombinationController {
 		model.addAttribute("currentRatio", generator.getCombinationRatio(ingredients));
 		Ingredient matchingIngredient = generator.getMatchingIngredient(ingredients, notliked);
 		model.addAttribute("ingredient", matchingIngredient.getName());
+		model.addAttribute("ingredientWhole", matchingIngredient);
 		request.getSession().setAttribute("combination", combination);
 		request.getSession().setAttribute("ingredient", matchingIngredient);
 		return "combinationFormUltimateMore";

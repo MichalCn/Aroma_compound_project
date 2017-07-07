@@ -105,11 +105,11 @@ public class RecipeGenerator {
 			names += ingredient.getName()+", ";
 		}
 		
-		System.out.println("Initial ingredients: "+names);
-		System.out.println("Checked ingredients: "+checkedIngredients);
-		System.out.println("Matching ingredient: "+matchingIngredient.getName());
-		System.out.println("Best ratio: "+newRatio);
-		System.out.println("Final new ratio: "+currentRatio*newRatio);
+//		System.out.println("Initial ingredients: "+names);
+//		System.out.println("Checked ingredients: "+checkedIngredients);
+//		System.out.println("Matching ingredient: "+matchingIngredient.getName());
+//		System.out.println("Best ratio: "+newRatio);
+//		System.out.println("Final new ratio: "+currentRatio*newRatio);
 		
 		return matchingIngredient;
 	}

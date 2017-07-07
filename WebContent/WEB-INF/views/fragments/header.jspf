@@ -7,7 +7,12 @@
 <title>Insert title here</title>
 </head>
 <header>
-  	<p>User: <%= session.getAttribute("logUserLogin")%> / <a href="./user/logout">Logout</a></p> 
+  	<p>User: <%= session.getAttribute("logUserLogin")%> / <a href="./user/logout">Logout</a></p>
+  	                <h4 class="sliders"> Admin</h4>
+				<div class="nonvisible">
+					<a href="./user/list"> Users list</a><br>
+					<a href="./combination/listall"> Combinations list</a><br>
+				</div> 
   	
   	<p>-----------------------------------------------------</p>
 </header>

@@ -2,6 +2,10 @@
 /* 	background-image: url("../images/book.jpeg"); */
 /* 	background-position: center; */
 /* } */
+div#this {
+	background-image: url('images/slides/background.jpg')	
+}
+
 
 body {
     font-family: Lato,'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -18,6 +22,21 @@ div.nonvisible {
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
     box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.panel-primary {
+    border-color: #337ab7;
+}
+
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+a#panel1 {
+	color: white;
+	background-color: transparent;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -73,6 +92,9 @@ ul, menu, dir {
 div.main {
 	color: #fff;
     background: #18bc9c;
+    /* background-image: url(https://drive.google.com/open?id=0B5DYkNe5k-K3aFBWLXlCTnFIbEk);
+    background-image: url(https://drive.google.com/open?id=0B5DYkNe5k-K3MXZiRFJQaW5obXc); */
+   
 }
 
 /* div { */
