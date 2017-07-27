@@ -61,7 +61,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="tagline">Business Name or Tagline</h1>
+                    <h1 class="tagline">Food ingredients matched by magic and chemistry</h1>
                 </div>
             </div>
         </div>
@@ -125,7 +125,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; MC 2017</p>
                 </div>
             </div>
             <!-- /.row -->

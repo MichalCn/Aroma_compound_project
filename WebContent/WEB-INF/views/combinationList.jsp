@@ -10,12 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet"> 
+<link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet"> 
 </head>
 <%@ include file="fragments/header.jspf" %>
 <%-- <jsp:include page="fragments/header.jspf"/> --%>
 <body>
-<div class="main">
-<table>
+
+<div class="container">           
+  <table class="table table-striped">
 	<tr>
 		<th>TITLE</th>
 		<th>NOTES</th>
