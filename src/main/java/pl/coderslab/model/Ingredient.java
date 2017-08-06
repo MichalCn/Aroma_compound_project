@@ -1,15 +1,10 @@
 package pl.coderslab.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -34,14 +29,10 @@ public class Ingredient {
 	@Size(max = 600)
 	@Column(columnDefinition="TEXT")
 	private String description;
-	//private List<String> links;
 	private String links;
 	private String image;
 	private String category;
-	//private List<String> aromas;
 	private String aromas;
-	//energy kj
-	//protein gram/%
 	
 	public Ingredient() {
 	}
@@ -57,23 +48,6 @@ public class Ingredient {
 		this.category = category;
 		this.aromas = aromas;
 	}
-
-
-
-
-
-
-
-
-
-//	public void fillExampleIngredient() {
-//		this.setId(4243);;
-//		this.setName("Angelica");
-//		this.setDescription("The garden angelic, commonly known simply as angelica, is a herbaceous plant which grows in subartic regions. Crystallized strips of young angelica stems and midribs are green in colour and are sold as decorative and flavoursome cake decoration material, but may also be enjoyed on their own.");
-//		this.setImage("/images/406");
-//		this.setCategory("/taxonomies/ingredients/categories/12");
-//		this.setAromas(Arrays.asList("/taxonomies/ingredients/aromas/2","/taxonomies/ingredients/aromas/3"));
-//	}
 	
 //	########### GET-SET ##############
 
@@ -96,12 +70,6 @@ public class Ingredient {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-//	public List<String> getLinks() {
-//		return links;
-//	}
-//	public void setLinks(List<String> links) {
-//		this.links = links;
-//	}
 
 	public String getImage() {
 		return image;
@@ -119,15 +87,6 @@ public class Ingredient {
 		this.category = category;
 	}
 
-//	public List<String> getAromas() {
-//		return aromas;
-//	}
-//
-//	public void setAromas(List<String> aromas) {
-//		this.aromas = aromas;
-//	}
-	
-
 	public String getLinks() {
 		return links;
 	}
@@ -142,18 +101,7 @@ public class Ingredient {
 
 	public void setAromas(String aromas) {
 		this.aromas = aromas;
-	}
-
-	
-
-
-//	@Override
-//	public String toString() {
-//		return "Ingredient [id=" + id + ", name=" + name + ", description=" + description + ", links=" + links
-//				+ ", image=" + image + ", category=" + category + ", aromas=" + aromas + "]";
-//	}
-	
-	
+	}	
 
 }
 

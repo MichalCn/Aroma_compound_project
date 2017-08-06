@@ -30,10 +30,6 @@ public class Pairing {
 	@Column(precision = 2, scale = 1)
 	private Double rel;
 	
-//	private Integer rel;	// uwaga, idzie wartość składnik-składnik i składnik-all
-//	private Integer abs;	// uwaga, idzie wartość składnik-składnik i składnik-all
-	//private String aroma;	// nie idzie z API
-	
 //	########## GET-SET
 
 	public Long getId() {
@@ -67,10 +63,6 @@ public class Pairing {
 	public void setRel(Double rel) {
 		this.rel = rel;
 	}
-	
-
-	
-	
 
 }
 

@@ -48,9 +48,6 @@ public class User {
 	@AssertTrue
 	private Boolean acceptRules;
 	
-	//@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
-	//private List<Tweet> tweets;
-	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private List<Combination> combinations;
 	
