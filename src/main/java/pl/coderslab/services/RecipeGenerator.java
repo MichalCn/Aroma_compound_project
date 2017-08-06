@@ -29,7 +29,6 @@ public class RecipeGenerator {
 		Double ratio = 1.0;
 		int counter = 0;
 		
-		List<Ingredient> ingredientsToCompare = ingredients;
 		for (int i = 0; i < ingredients.size(); i++) {
 			Ingredient ingredient = ingredients.get(i);
 			for (int j = i+1; j < ingredients.size(); j++) {
@@ -47,10 +46,6 @@ public class RecipeGenerator {
 		}
 		System.out.println("Counter: "+counter);
 		return ratio;
-	}
-	
-	private Combination matchIngredientOfCategory (List<Ingredient> ingredients) {
-		return null;
 	}
 	
 	public Ingredient getMatchingIngredient(List<Ingredient> ingredients, List<Ingredient> notliked) {
@@ -104,12 +99,7 @@ public class RecipeGenerator {
 		for (Ingredient ingredient : ingredients) {
 			names += ingredient.getName()+", ";
 		}
-		
-//		System.out.println("Initial ingredients: "+names);
-//		System.out.println("Checked ingredients: "+checkedIngredients);
-//		System.out.println("Matching ingredient: "+matchingIngredient.getName());
-//		System.out.println("Best ratio: "+newRatio);
-//		System.out.println("Final new ratio: "+currentRatio*newRatio);
+
 		
 		return matchingIngredient;
 	}
@@ -123,46 +113,5 @@ public class RecipeGenerator {
 		return false;
 	}
 	
-	public void populatePairingsDatabase() {
-		
-		List<Ingredient> allIngredientsList = ingredientRepository.findAll();
-		Random random = new Random();
-		for (int i = 0; i < allIngredientsList.size(); i++) {
-			for (int j = 0; j < allIngredientsList.size(); j++) {
-				Pairing pairing = new Pairing(); 
-				if (pairingRepository.findFirstByIngredient1IdAndIngredient2Id(allIngredientsList.get(i).getId(), allIngredientsList.get(j).getId()) == null) {
-					if (pairingRepository.findFirstByIngredient1IdAndIngredient2Id(allIngredientsList.get(j).getId(), allIngredientsList.get(i).getId()) == null) {
-						pairing.setIngredient1(allIngredientsList.get(i));
-						pairing.setIngredient2(allIngredientsList.get(j));
-						Double randomDouble = random.nextDouble();
-						pairing.setRel(randomDouble);
-						pairingRepository.save(pairing);
-						pairing.setIngredient1(allIngredientsList.get(j));
-						pairing.setIngredient2(allIngredientsList.get(i));
-						pairingRepository.save(pairing);
-					} else {
-						pairing = pairingRepository.findFirstByIngredient1IdAndIngredient2Id(allIngredientsList.get(j).getId(), allIngredientsList.get(i).getId());
-						pairing.setIngredient1(allIngredientsList.get(i));
-						pairing.setIngredient2(allIngredientsList.get(j));
-						pairingRepository.save(pairing);
-					}
-				} else {
-					pairing = pairingRepository.findFirstByIngredient1IdAndIngredient2Id(allIngredientsList.get(i).getId(), allIngredientsList.get(j).getId());
-					pairing.setIngredient1(allIngredientsList.get(j));
-					pairing.setIngredient2(allIngredientsList.get(i));
-					pairingRepository.save(pairing);
-				} 
-					
-			}
-		}
-		List<Pairing> allPairingsList = pairingRepository.findAll();
-		for (Pairing pairing : allPairingsList) {
-			if (pairing.getIngredient1().getId()==pairing.getIngredient2().getId()) {
-				pairingRepository.delete(pairing);
-			}
-		}
-		
-	}
 	
 }
-// hello back

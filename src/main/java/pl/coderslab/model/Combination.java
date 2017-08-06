@@ -32,21 +32,16 @@ public class Combination {
 	@Size(max = 16)
 	private String notes;
 	
-//	@NotBlank	// problemy z podaniem parametru z zewatrz formularza do poprawnej walidacji
 	@ManyToOne
 	private User user;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Ingredient> ingredients;
 	
-	//private List<Integer> amounts;
-	
 	@CreationTimestamp
 	private Date created;
 	
 	//########## GET-SET #############
-
-
 
 	@Override
 	public String toString() {

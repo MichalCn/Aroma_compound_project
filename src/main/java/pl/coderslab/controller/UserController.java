@@ -57,7 +57,6 @@ public class UserController {
 		}
 	}
 	
-	// połącz login i register form potem
 	@RequestMapping(path="/login", method= RequestMethod.GET)
 	public String loginUser(Model model) {
 		model.addAttribute("user", new User());
@@ -78,18 +77,16 @@ public class UserController {
 		}
 	}
 	
-	//logowanie przenieść do metody w pakiecie pl.coderslab.util -> class SecurityUtil
-	@RequestMapping(path="/authenticated", method= RequestMethod.GET)	// z tego możemy iść w getTweets dla konkretnego użytkownika tweetRepo.getTweetByUserId(request.getSession().getAttribute("userId"))
+	@RequestMapping(path="/authenticated", method= RequestMethod.GET)
 	@ResponseBody
-	public String isAuthenticated(Model model, HttpServletRequest request) {  //@SessionAttribute Long UserId
-		String result = (String) request.getSession().getAttribute("logUserId");  //is Null ??
+	public String isAuthenticated(Model model, HttpServletRequest request) {
+		String result = (String) request.getSession().getAttribute("logUserId");
 		
 		if (result != null) {
 			return userRepository.getOne(Long.valueOf(result)).getLogin();
 		} else {
 			return "Nie zalogowano.";
 		}
-		//Optional<T>.ofNullable(session.getAttribute("userId")).map(Object)
 	}
 	
 	@RequestMapping(path="/logout", method= RequestMethod.GET)	
@@ -97,11 +94,6 @@ public class UserController {
 		request.getSession().invalidate();
 		return "redirect:/";
 	}
-	
-//	response.getWriter().append(request.getRemoteAddr()+"\n");  			// Adres IP
-//	response.getWriter().append(request.getHeader("user-agent")+"\n");	// Przeglądarkę
-//	response.getWriter().append(new Date().toString()+"\n");				// Aktualny czas
-
 	
 	//ADD
 	@RequestMapping(path="/add", method= RequestMethod.GET)
