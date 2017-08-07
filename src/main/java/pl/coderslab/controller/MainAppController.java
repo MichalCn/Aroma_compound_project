@@ -9,9 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class MainAppController {
 		
-	// ADD
 	@RequestMapping(path="/", method= RequestMethod.GET)
-	public String showAddAuthorForm() {
+	public String showMainView() {
 		return "mainAppView";
 	}
 

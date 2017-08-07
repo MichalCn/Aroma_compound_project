@@ -1,19 +1,75 @@
 package pl.coderslab.dao;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 import pl.coderslab.model.Ingredient;
-import pl.coderslab.repository.IngredientRepository;
 
 @Repository
 public class IngredientDao {
 	
-	@Autowired
-	IngredientRepository ingredientRepository;
+	public HttpURLConnection setConnection(String path) {
+		HttpURLConnection conn = null; 
+		try {
+
+			URL url = new URL("https://api.foodpairing.com/"+path);	//you can do it with the standard Java API. Check out URL, URLConnection, and maybe HttpURLConnection from package java.net.
+			conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+			conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty("Content-Type", "application/json");
+			conn.setRequestProperty("X-Application-ID", "4a6a4d5e");
+			conn.setRequestProperty("X-Application-Key", "3cdc209a28cdb60aae1f8e52b2ef48c2");
+
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP error code : " + conn.getResponseCode());
+			}
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+
+		return conn;
+
+	}
 	
-	// ADD THROUGH API BY NAME
+	public String getIngredientFromApiById(Integer id) {
+		String output = null;
+		try {
+
+			HttpURLConnection conn = setConnection("ingredients/" + id);
+			BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
+
+			System.out.println("Output from Server .... \n");
+			while ((output = br.readLine()) != null) {
+				System.out.println(output);
+			}
+
+			conn.disconnect();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+
+		return output;
+
+	}
+	
+	public String getAllIngredientsFromApi() {
+		return null;
+	}
+	
+	// ADD THROUGH MOCK API BY NAME
 	public Ingredient getIngredientFromApi(String name) {
 		Ingredient ingredient = null;
 		try {
@@ -24,11 +80,6 @@ public class IngredientDao {
 		}
 		return ingredient;
 	}
-	
-	
-////	JSON EXAMPLES
-////	{"id":2,"name":"Pinaple","description":"","links":"","image":"","category":"","aromas":""}
-//		{"name":"Pinaple"}
 
 //	@RequestMapping(path="/getjson", method= RequestMethod.GET)
 //	@ResponseBody
@@ -68,16 +119,6 @@ public class IngredientDao {
 //		return list;
 //	} 
 	
-//	############## JSON CREATOR
-//	@JsonCreator
-//	public Book(@JsonProperty("id") Long id, @JsonProperty("isbn") String isbn, @JsonProperty("title") String title, 
-//			@JsonProperty("author") String author, @JsonProperty("publisher") String publisher, @JsonProperty("type") String type) {
-//		this.id = id;
-//		this.isbn = isbn;
-//		this.title = title;
-//		this.author = author;
-//		this.publisher = publisher;
-//		this.type = type;
-//	}
+
 
 }
